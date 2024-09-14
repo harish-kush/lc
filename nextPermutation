@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size()-1;
+        int inft = 0;   // inflextion point
+        for(int i=n;i>0;i--){
+            if(nums[i]>nums[i-1]) {
+                inft = i;
+                break;
+            }
+        }
+        if(inft==0) sort(nums.begin(),nums.end());
+        else{
+            int toswap = nums[inft-1];
+            int max = INT_MAX;
+            for(int i = inft;i<=n;i++){
+                if(nums[i]-toswap>0 && nums[i]-toswap<max) swap(nums[i],nums[inft-1]);
+            }
+            sort(nums.begin()+inft,nums.end());
+        }
+       
+    }
+};
